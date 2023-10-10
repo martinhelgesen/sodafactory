@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dotnet-webclient-deployment
+  labels:
+    app: dotnet-webclient
+spec:
+  replicas: 3  # Number of replicas (pods) to run
+  selector:
+    matchLabels:
+      app: dotnet-webclient
+  template:
+    metadata:
+      labels:
+        app: dotnet-webclient
+    spec:
+      containers:
+        - name: dotnet-webclient
+          image: nuget.simployer.tech/images/simployer/martinapp:latest
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: simployer-registry-secret3  # Name of the Docker registry secret

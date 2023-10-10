@@ -7,7 +7,8 @@ namespace sodafactoryclient.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
+    private static int pageviewcount = 0;
+    
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
@@ -15,6 +16,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        ViewData["PageViewCount"] = ++pageviewcount;
         return View();
     }
 

@@ -1,0 +1,21 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dotnet-webclient-ingress
+  namespace: default
+  annotations:
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+  labels:
+    app: dotnet-webclient
+    release: dotnet-webclient
+spec:
+  entryPoints:
+    - web
+    - websecure
+  tls: {}
+  routes:
+    - match: Host(`dotnet-webclient.service.simployer.tech`)
+      kind: Rule
+      services:
+        - name: dotnet-webclient-service
+          port: 80

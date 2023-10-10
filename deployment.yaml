@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sodafactory-deployment
+  labels:
+    app: sf
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sf
+  template:
+    metadata:
+      labels:
+        app: sf
+    spec:
+      containers:
+      - name: nginx
+        image: testsolution-client:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
